@@ -7,12 +7,10 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
     $email = $_GET['email'];
     $token = $_GET['token'];
     
-    // Check if the email and token are valid
     $stmt = $conn->prepare("SELECT * FROM account WHERE email = ? AND activate_token = ? AND activated = 0");
     $stmt->execute([$email, $token]);
     
     if ($stmt->rowCount() > 0) {
-        // Activate the account
         $update_stmt = $conn->prepare("UPDATE account SET activated = 1, activate_token = NULL WHERE email = ?");
         $result = $update_stmt->execute([$email]);
         

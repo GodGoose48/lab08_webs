@@ -69,7 +69,6 @@ if (isset($_POST['first']) && isset($_POST['last']) && isset($_POST['email'])
                 $result = $stmt->execute([$user, $first_name, $last_name, $email, $hashed_password, $activate_token]);
                 
                 if ($result) {
-                    // Send activation email
                     $activation_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/activate.php?email=$email&token=$activate_token";
                     $subject = "Account Activation";
                     $body = "

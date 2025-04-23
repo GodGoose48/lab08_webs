@@ -51,7 +51,6 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['pass-confir
         $result = $update_stmt->execute([$hashed_password, $email]);
         
         if ($result) {
-            // Invalidate token
             $delete_stmt = $conn->prepare("DELETE FROM reset_token WHERE email = ?");
             $delete_stmt->execute([$email]);
             
